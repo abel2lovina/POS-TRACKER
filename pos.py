@@ -38,6 +38,10 @@ app.secret_key = 'dev-secret-key'
 
 db = SQLAlchemy(app)
 
+@app.route('/')
+def home():
+    return redirect(url_for('login'))
+
 class User(db.Model):
     __tablename__ = 'users'
 
