@@ -11,6 +11,15 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
+<style>
+body {
+    background-image: url("{{ url_for('static', filename='images/mark.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+</style>
 
 <form method="POST" class="form-control form-select mb-3">
   <div class="mb-3">
