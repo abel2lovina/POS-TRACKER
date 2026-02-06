@@ -10,40 +10,52 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Markus POS Records</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav me-auto">
-                    {% if session.role == 'owner' %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/transactions">Transaction History</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Back to Dashboard</a>
-                    </li>
-                    {% endif %}
-                    {% if session.role == 'staff' %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Back to Dashboard</a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <ul class="navbar-nav">
-                    {% if session.user_id %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Markus POS Records</a>
+
+    <!-- Toggler button for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto">
+        {% if session.role == 'owner' %}
+        <li class="nav-item">
+          <a class="nav-link" href="/transactions">Transaction History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Back to Dashboard</a>
+        </li>
+        {% endif %}
+        {% if session.role == 'staff' %}
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Back to Dashboard</a>
+        </li>
+        {% endif %}
+      </ul>
+
+      <!-- Right-aligned buttons -->
+      <ul class="navbar-nav ms-auto">
+        {% if session.user_id %}
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
 
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
