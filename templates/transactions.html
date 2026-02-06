@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Transaction History{% endblock %}
+
+{% block content %}
+<h2>Transaction History</h2>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Staff</th>
+        <th>Machine</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Time</th>
+    </tr>
+    {% for t in transactions %}
+    <tr>
+        <td>{{ t.user.username }}</td>
+        <td>{{ t.machine.name }}</td>
+        <td>{{ t.transaction_type }}</td>
+        <td>{{ t.amount }}</td>
+        <td>{{ t.created_at }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+
+
+
+
+
+
+
+<h2>Transaction History</h2>
+
+<table border="1" cellpadding="8"  >
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Staff</th>
+            <th>POS Machine</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date & Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in transactions %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ t.user.username }}</td>
+            <td>{{ t.machine.name }}</td>
+            <td>{{ t.transaction_type }}</td>
+            <td>₦{{ t.amount }}</td>
+            <td>{{ t.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

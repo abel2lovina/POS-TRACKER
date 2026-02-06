@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+<h3>Opening balance: {{opening_balance}}</h3>
+{% if session.role == 'owner' %}
+
+<!-- OWNER ACTIONS -->
+<div class="mb-4">
+    <li><a href="/set_cash">Set Cash at Hand</a></li>
+    <li><a href="/transactions">Transaction History</a></li>
+    <li><a href="/owner_settings">Reset Login Details</a></li>
+
+</div>
+
+<!-- MACHINES TABLE -->
+<div class="card mb-4">
+    <div class="card-header fw-bold">POS Machines</div>
+    <div class="card-body p-0">
+        <table class="table table-striped mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Balance</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for machine in machines %}
+                <tr>
+                    <td>{{ machine.name }}</td>
+                    <td>₦{{ machine.balance }}</td>
+                    <td>
+                        <a href="/update_machine/{{ machine.id }}" class="btn btn-sm btn-warning">
+                            Update
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% else %}
+
+<div class="alert alert-info">
+    <h4>Welcome, {{ user.username }}!</h4>
+    <p>Role: {{ session.role }}</p>
+</div>
+
+
+
+<h5>Actions</h5>
+<a href="/transaction" class="btn btn-success btn-sm">Add Transaction</a>
+<a href="/summary" class="btn btn-outline-primary btn-sm">Daily Summary</a>
+
+
+<h3>Machine Balances</h3>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Machine</th>
+        <th>Balance (₦)</th>
+
+        {% if session.role == 'owner' %}
+            <th>Action</th>
+        {% endif %}
+    </tr>
+
+    {% for machine in machines %}
+    <tr>
+        <td>{{ machine.name }}</td>
+        <td>{{ machine.balance }}</td>
+
+        {% if session.role == 'owner' %}
+            <td>
+                <a href="{{ url_for('update_machine', machine_id=machine.id) }}">
+                    Update
+                </a>
+            </td>
+        {% endif %}
+    </tr>
+    
+    {% endfor %}
+</table>
+
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Daily Summary ({{ summary.summary_date }})</h2>
+
+<p><strong>Cash at Hand (set by owner):</strong> ₦{{ summary.cash_at_hand }}</p>
+
+<hr>
+
+<p>Total Deposits: ₦{{ deposits }}</p>
+<p>Total Withdrawals: ₦{{ withdrawals }}</p>
+
+
+<hr>
+
+<h3>Machine Balances</h3>
+
+<ul>
+{% for machine in machines %}
+    <li>{{ machine.name }}: ₦{{ machine.balance }}</li>
+    
+    
+{% endfor %}
+</ul>
+
+<p><strong>Total Machine Balance:</strong> ₦{{ total_machine_balance }}</p>
+
+<hr>
+<script>
+    
+</script>
+<p><strong>Cash Balance:</strong> ₦{{ cash_balance }}</p>
+<p><strong>Closing Balance:</strong> ₦{{ closing_balance }}</p>
+
+{%endblock%}
